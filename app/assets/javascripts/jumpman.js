@@ -3,6 +3,9 @@ var counterV = 0;
 var up = true;
 var go = false;
 var rightSide = true;
+var goingRight = false;
+var goingLeft = false;
+var jumping = false;
 
 var jumpCurve = [];
 for (var i = 1; i < 120; i++) {
@@ -14,6 +17,7 @@ for (var i = 1; i < 120; i++) {
 function right() {
   // var set = ['<%= image_tag "marioRun1.png" %>', '<%= image_tag "marioRun2.png" %>', '<%= image_tag "marioRun3.png" %>', '<%= image_tag "marioRun2.png" %>']
   rightSide = true;
+  goingRight = true;
   var set = ['assets/marioRunRight1.png', 'assets/marioRunRight2.png', 'assets/marioRunRight3.png', 'assets/marioRunRight2.png', "assets/marioStandRight.png"]
   var mario = document.getElementById("mario");
   var space = document.getElementById("space")
@@ -102,6 +106,7 @@ function right() {
 function left() {
   // var set = ['<%= image_tag "marioRun1.png" %>', '<%= image_tag "marioRun2.png" %>', '<%= image_tag "marioRun3.png" %>', '<%= image_tag "marioRun2.png" %>']
   rightSide = false;
+  goingLeft = true;
   var set = ['assets/marioRunLeft1.png', 'assets/marioRunLeft2.png', 'assets/marioRunLeft3.png', 'assets/marioRunLeft2.png', '/assets/marioStandLeft.png']
   var mario = document.getElementById("mario");
   var space = document.getElementById("space")
@@ -177,7 +182,6 @@ function left() {
     }, 0);
   }, 300);
 
-
   var moving = setInterval(function() {
     if (counterH >= 0) {
       space.style.marginLeft = counterH + "px";
@@ -194,6 +198,8 @@ function left() {
 
 function jump() {
 
+  jumping = true;
+  console.log(jumping);
   var jumpCount = 0;
   var space = document.getElementById("space");
   var mario = document.getElementById("mario");
@@ -207,7 +213,7 @@ function jump() {
   var upDown = setInterval(function() {
 
     space.style.marginBottom = (jumpCurve[jumpCount]) + "px";
-    space.style.marginTop = (300 - jumpCurve[jumpCount]) + "px";
+    space.style.marginTop = (331 - jumpCurve[jumpCount]) + "px";
 
     jumpCount++;
     if (jumpCount == jumpCurve.length) {
@@ -216,6 +222,7 @@ function jump() {
       } else {
         mario.src = '/assets/marioStandLeft.png';
       }
+      jumping = false;
       clearInterval(upDown);
     }
 
@@ -223,48 +230,60 @@ function jump() {
 
 }
 
-function jump2() {
-
-  var jumpCount = 0;
-  var space = document.getElementById("space");
-  var mario = document.getElementById("mario");
-
-  var upAndDown = setInterval(function() {
-    if (up) {
-      jumpCount++;
-      space.style.marginTop = (150 - jumpCount) + "px";
-      space.style.marginBottom = jumpCount + "px";
-      if (jumpCount >= 100) {
-        up = false;
-      }
-    } else {
-      jumpCount--;
-      space.style.marginTop = (150 - jumpCount) + "px";
-      space.style.marginBottom = jumpCount + "px";
-      if (jumpCount == 0) {
-        if (rightSide) {
-          mario.src = '/assets/marioStandRight.png';
-        } else {
-          mario.src = '/assets/marioStandLeft.png';
-        }
-        clearInterval(upAndDown);
-        up = true;
-      }
+function stop() {
+  go = false;
+  if (jumping) {
+    if (goingRight) {
+      goingRight = false;
+      document.getElementById("mario").src = "/assets/marioJumpRight.png";
+    } else if (goingLeft) {
+      goingLeft = false;
+      document.getElementById("mario").src = "/assets/marioJumpLeft.png";
     }
-
-  }, 5);
+  } else {
+    if (goingRight) {
+      goingRight = false;
+      document.getElementById("mario").src = "/assets/marioStandRight.png";
+    } else if (goingLeft) {
+      goingLeft = false;
+      document.getElementById("mario").src = "/assets/marioStandLeft.png";
+    }
+  }
 }
+
+// window.onKeyDown = function keyPressTest(e) {
+//   document.getElementById("keyPress")
+// }
+// <- := 37  -> := 39 space := 32
+$(document).keydown(function(e){
+  if (e.keyCode==39) {
+    right();
+  } else if (e.keyCode==37) {
+    left();
+  } else if (e.keyCode==32) {
+    jump();
+  }
+});
+
+$(document).keyup(function(e){
+  if (e.keyCode==39) {
+    stop();
+  } else if (e.keyCode==37) {
+    stop();
+  }
+  // } else if (e.keyCode==32) {
+  //   stop();
+  // }
+});
+
+//extra
 
 function jumpRight() {
 
   var jumpCount = 0;
   var space = document.getElementById("space");
   var mario = document.getElementById("mario");
-  if (rightSide) {
-    mario.src = "/assets/marioJumpRight.png";
-  } else {
-    mario.src = "/assets/marioJumpLeft.png";
-  }
+  mario.src = "/assets/marioJumpRight.png";
 
 
   var upDown = setInterval(function() {
@@ -315,11 +334,34 @@ function jumpLeft() {
 
 }
 
-function stop() {
-  go = false;
-  if (rightSide) {
-    document.getElementById("mario").src = "/assets/marioStandRight.png";
-  } else {
-    document.getElementById("mario").src = "/assets/marioStandLeft.png";
-  }
+function jump2() {
+
+  var jumpCount = 0;
+  var space = document.getElementById("space");
+  var mario = document.getElementById("mario");
+
+  var upAndDown = setInterval(function() {
+    if (up) {
+      jumpCount++;
+      space.style.marginTop = (150 - jumpCount) + "px";
+      space.style.marginBottom = jumpCount + "px";
+      if (jumpCount >= 100) {
+        up = false;
+      }
+    } else {
+      jumpCount--;
+      space.style.marginTop = (150 - jumpCount) + "px";
+      space.style.marginBottom = jumpCount + "px";
+      if (jumpCount == 0) {
+        if (rightSide) {
+          mario.src = '/assets/marioStandRight.png';
+        } else {
+          mario.src = '/assets/marioStandLeft.png';
+        }
+        clearInterval(upAndDown);
+        up = true;
+      }
+    }
+
+  }, 5);
 }
