@@ -23,69 +23,87 @@ function right() {
   var space = document.getElementById("space")
   setTimeout(function() {
     go = true;
-    if (!go) {
-      clearInterval(sprites);
-      mario.src = set[4];
-    } else {
-    mario.src = set[0];
-    }
-    setTimeout(function() {
+    if (!jumping) {
       if (!go) {
         clearInterval(sprites);
         mario.src = set[4];
       } else {
-      mario.src = set[1];
+        mario.src = set[0];
       }
-      setTimeout(function() {
+    }
+    setTimeout(function() {
+      if (!jumping) {
         if (!go) {
           clearInterval(sprites);
           mario.src = set[4];
         } else {
-        mario.src = set[2];
+          mario.src = set[1];
         }
-        setTimeout(function() {
+      }
+      setTimeout(function() {
+        if (!jumping) {
           if (!go) {
             clearInterval(sprites);
             mario.src = set[4];
           } else {
-          mario.src = set[3];
+            mario.src = set[2];
+          }
+        }
+        setTimeout(function() {
+          if (!jumping) {
+            if (!go) {
+              clearInterval(sprites);
+              mario.src = set[4];
+            } else {
+              mario.src = set[3];
+            }
           }
         }, 75);
       }, 75);
     }, 75);
   }, 0);
   var sprites = setInterval(function() {
-    if (!go) {
-      clearInterval(sprites);
-      mario.src = set[4];
-    }
-    setTimeout(function() {
+    if (!jumping) {
       if (!go) {
         clearInterval(sprites);
         mario.src = set[4];
-      } else {
-      mario.src = set[0];
       }
-      setTimeout(function() {
+    }
+    setTimeout(function() {
+      if (!jumping) {
         if (!go) {
           clearInterval(sprites);
           mario.src = set[4];
         } else {
-        mario.src = set[1];
+          mario.src = set[0];
         }
-        setTimeout(function() {
+      }
+      setTimeout(function() {
+        if (!jumping) {
           if (!go) {
             clearInterval(sprites);
             mario.src = set[4];
           } else {
-          mario.src = set[2];
+            mario.src = set[1];
           }
-          setTimeout(function() {
+        }
+        setTimeout(function() {
+          if (!jumping) {
             if (!go) {
               clearInterval(sprites);
               mario.src = set[4];
             } else {
-            mario.src = set[3];
+              mario.src = set[2];
+            }
+          }
+          setTimeout(function() {
+            if (!jumping) {
+              if (!go) {
+                clearInterval(sprites);
+                mario.src = set[4];
+              } else {
+                mario.src = set[3];
+              }
             }
           }, 75);
         }, 75);
@@ -112,69 +130,87 @@ function left() {
   var space = document.getElementById("space")
   setTimeout(function() {
     go = true;
-    if (!go) {
-      clearInterval(sprites);
-      mario.src = set[4];
-    } else {
-    mario.src = set[0];
-    }
-    setTimeout(function() {
+    if (!jumping) {
       if (!go) {
         clearInterval(sprites);
         mario.src = set[4];
       } else {
-      mario.src = set[1];
+        mario.src = set[0];
       }
-      setTimeout(function() {
+    }
+    setTimeout(function() {
+      if (!jumping) {
         if (!go) {
           clearInterval(sprites);
           mario.src = set[4];
         } else {
-        mario.src = set[2];
+          mario.src = set[1];
         }
-        setTimeout(function() {
+      }
+      setTimeout(function() {
+        if (!jumping) {
           if (!go) {
             clearInterval(sprites);
             mario.src = set[4];
           } else {
-          mario.src = set[3];
+            mario.src = set[2];
+          }
+        }
+        setTimeout(function() {
+          if (!jumping) {
+            if (!go) {
+              clearInterval(sprites);
+              mario.src = set[4];
+            } else {
+              mario.src = set[3];
+            }
           }
         }, 75);
       }, 75);
     }, 75);
   }, 0);
   var sprites = setInterval(function() {
-    if (!go) {
-      clearInterval(sprites);
-      mario.src = set[4];
-    }
-    setTimeout(function() {
+    if (!jumping) {
       if (!go) {
         clearInterval(sprites);
         mario.src = set[4];
-      } else {
-      mario.src = set[0];
       }
-      setTimeout(function() {
+    }
+    setTimeout(function() {
+      if (!jumping) {
         if (!go) {
           clearInterval(sprites);
           mario.src = set[4];
         } else {
-        mario.src = set[1];
+          mario.src = set[0];
         }
-        setTimeout(function() {
+      }
+      setTimeout(function() {
+        if (!jumping) {
           if (!go) {
             clearInterval(sprites);
             mario.src = set[4];
           } else {
-          mario.src = set[2];
+            mario.src = set[1];
           }
-          setTimeout(function() {
+        }
+        setTimeout(function() {
+          if (!jumping) {
             if (!go) {
               clearInterval(sprites);
               mario.src = set[4];
             } else {
-            mario.src = set[3];
+              mario.src = set[2];
+            }
+          }
+          setTimeout(function() {
+            if (!jumping) {
+              if (!go) {
+                clearInterval(sprites);
+                mario.src = set[4];
+              } else {
+                mario.src = set[3];
+              }
             }
           }, 75);
         }, 75);
